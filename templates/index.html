@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delhi Tourist Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Mappls SDK -->
+  <script src="https://apis.mappls.com/advancedmaps/api/d8d7172a111ef3e363787dafa39dc89d/map_sdk?layer=vector&v=3.0&callback=initMap" defer async></script>
+</head>
+<body>
+  <header>
+    <h1>Delhi Tourist Places Map</h1>
+    <p>Find and explore the top tourist attractions in Delhi</p>
+  </header>
+
+  <main class="main-layout">
+    <!-- LEFT: Sidebar -->
+    <aside class="sidebar">
+      <h2>Tourist Places</h2>
+      <ul>
+        {% for place in places %}
+          <li onclick="showMarker('{{ place.latitude }}','{{ place.longitude }}','{{ place.eloc }}','{{ place.name }}','{{place.manufacturing_date}}','{{place.manufacture_name}}','{{place.metro_station}}')">
+            {{ place.name }}
+          </li>
+        {% endfor %}
+      </ul>
+    </aside>
+
+    <!-- CENTER: Map -->
+    <section class="map-container">
+      <div id="map"></div>
+      <div class="controls">
+        <button id="toggleRotationBtn" onclick="toggleRotation()">⏸ Pause Rotation</button>
+      </div>
+    </section>
+
+    <!-- RIGHT: Details -->
+    <aside class="details">
+      <h2>Details</h2>
+      <div id="result">👉 Select a place from left list or map</div>
+    </aside>
+  </main>
+
+  <footer>
+    <p>© 2025 Delhi Tourism | Powered by Vikash</p>
+  </footer>
+
+  <!-- JS -->
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
