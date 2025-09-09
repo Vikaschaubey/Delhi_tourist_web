@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, flash
 from database import get_data, get_connection, delete_by_eloc
 import os
+import mysql.connector
 
 app = Flask(__name__)
 
@@ -10,8 +11,7 @@ db=mysql.connector.connect(
     host=os.getenv("DB_HOST"),
     user=os.getenv("DB_USERNAME"),
     password=os.getenv("DB_PASSWORD"),
-    database=os.getenv("DB_NAME"),
-    port=int(os.getenv("DB_PORT", 3360))
+    database=os.getenv("DB_NAME")
 )
     
 
