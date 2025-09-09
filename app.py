@@ -1,9 +1,19 @@
 from flask import Flask, render_template, redirect, request, flash
 from database import get_data, get_connection, delete_by_eloc
+import os
 
 app = Flask(__name__)
 
 app.secret_key = "supersecretkey"
+
+db=mysql.connector.connect(
+    host=os.getenv("DB_host")
+    user=os.getenv("DB_host")
+    password=os.getenv("DB_host")
+    database=os.getenv("DB_host")
+    port=int(os.getenv("DB_host", 3360))
+)
+    
 
 def normalize_row(r):
     """Turn a DB row (dict) into a canonical place dict used by the front-end."""
